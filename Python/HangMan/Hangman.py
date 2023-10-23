@@ -36,7 +36,7 @@ pygame.display.set_caption("Jeu du pendu")
 rect_noir = pygame.Rect(650, 150, 200, 50)
 
 # Ajout du background
-background = pygame.image.load("HangMan/bg_farwest.jpeg")
+background = pygame.image.load("Python/HangMan/bg_farwest.jpeg")
 background = pygame.transform.scale(background, (largeur, hauteur))
 
 # Boucle du jeu
@@ -85,10 +85,10 @@ while en_cours:
 
     # Affichage successif du pendu en fonction des erreurs
     if erreur >= 1 and erreur <= 7:
-        pendu = pygame.image.load(f"HangMan/Le-Pendu-{erreur}.png")
+        pendu = pygame.image.load(f"Python/HangMan/Le-Pendu-{erreur}.png")
     elif erreur == 8:
         if not perdu:
-            pendu = pygame.image.load(f"HangMan/Le-Pendu-{erreur}.png")
+            pendu = pygame.image.load(f"Python/HangMan/Le-Pendu-{erreur}.png")
             font_erreur = pygame.font.Font(None, 52)
             erreur_texte = font_erreur.render("Perdu ! Appuyez sur 'R' pour recommencer ou 'Q' pour quitter.", True, BLANC)
             perdu = True
@@ -104,7 +104,7 @@ while en_cours:
                             mot_a_deviner = random.choice(mots).upper()
                             mot_affiche = ["_" for _ in mot_a_deviner]
                             lettres_tapees = []
-                            pendu = pygame.image.load(f"HangMan/Le-Pendu-{erreur}.png")
+                            pendu = pygame.image.load(f"Python/HangMan/Le-Pendu-{erreur}.png")
                             fenetre.blit(pendu, (400, 200))
                         elif event.key == pygame.K_q:
                             en_cours = False
