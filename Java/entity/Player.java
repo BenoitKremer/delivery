@@ -38,14 +38,14 @@ public class Player extends Entity{
     public void getPlayerImage() {
 
         try {
-            up1 = ImageIO.read(getClass().getResourceAsStream("/res/Player/KnightUpAFK.png"));
-            up2 = ImageIO.read(getClass().getResourceAsStream("/res/Player/KnightUpMove.png"));
-            down1 = ImageIO.read(getClass().getResourceAsStream("/res/Player/KnightDownAFK.png"));
-            down2 = ImageIO.read(getClass().getResourceAsStream("/res/Player/KnightDownMove.png"));
-            left1 = ImageIO.read(getClass().getResourceAsStream("/res/Player/KnightLeftAFK.png"));
-            left2 = ImageIO.read(getClass().getResourceAsStream("/res/Player/KnightLeftMove.png"));
-            right1 = ImageIO.read(getClass().getResourceAsStream("/res/Player/KnightRightAFK.png"));
-            right2 = ImageIO.read(getClass().getResourceAsStream("/res/Player/KnightRightMove.png"));
+            up1 = ImageIO.read(getClass().getResourceAsStream("/Java/res/Player/KnightUpAFK.png"));
+            up2 = ImageIO.read(getClass().getResourceAsStream("/Java/res/Player/KnightUpMove.png"));
+            down1 = ImageIO.read(getClass().getResourceAsStream("/Java/res/Player/KnightDownAFK.png"));
+            down2 = ImageIO.read(getClass().getResourceAsStream("/Java/res/Player/KnightDownMove.png"));
+            left1 = ImageIO.read(getClass().getResourceAsStream("/Java/res/Player/KnightLeftAFK.png"));
+            left2 = ImageIO.read(getClass().getResourceAsStream("/Java/res/Player/KnightLeftMove.png"));
+            right1 = ImageIO.read(getClass().getResourceAsStream("/Java/res/Player/KnightRightAFK.png"));
+            right2 = ImageIO.read(getClass().getResourceAsStream("/Java/res/Player/KnightRightMove.png"));
 
 
         }
@@ -63,21 +63,21 @@ public class Player extends Entity{
          || keyH.leftPressed == true 
          || keyH.rightPressed == true){
 
-        /*Cette partie permet "d'animer" le sprite 
-         * c'est ce qui va faire le changement entre
-        la frame(image) 1 et la frame 2 */
-        spriteCounter++;
-        if(spriteCounter > 10){ //Le 10 permet de changer toutes les 10frames DU JEU donc à 60 FPS 6 changements par secondes
-            if(spriteNum ==1){
-                spriteNum = 2;
+            /*Cette partie permet "d'animer" le sprite 
+             * c'est ce qui va faire le changement entre
+            la frame(image) 1 et la frame 2 */
+            spriteCounter++;
+            if(spriteCounter > 10){ //Le 10 permet de changer toutes les 10frames DU JEU donc à 60 FPS 6 changements par secondes
+                if(spriteNum ==1){
+                    spriteNum = 2;
+                }
+                else if (spriteNum == 2) {
+                    spriteNum = 1;
+                }
+                spriteCounter = 0;
             }
-            else if (spriteNum == 2) {
-                spriteNum = 1;
-            }
-            spriteCounter = 0;
-        }
             
-         }
+        }
         
         if(keyH.upPressed == true) {
             direction = "up";

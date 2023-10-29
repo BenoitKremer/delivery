@@ -8,6 +8,7 @@ import java.awt.Graphics2D;
 import javax.swing.JPanel;
 
 import Java.entity.Player;
+import Java.tiles.TileManager;
 
 public class GamePanel extends JPanel implements Runnable{
 
@@ -18,24 +19,24 @@ public class GamePanel extends JPanel implements Runnable{
     final int scale = 3;
     //Définis la taille d'une tuile (case)
     public final int tileSize = originalTileSize * scale; //16*3 = 48x48
-    final int maxScreenCol = 16;
-    final int maxScreenRow = 12;
-    final int screenWidth = tileSize * maxScreenCol;    //48*16 = 768px
-    final int screenHeight = tileSize * maxScreenRow;  //48*12 = 576px
+    public final int maxScreenCol = 16;
+    public final int maxScreenRow = 12;
+    public final int screenWidth = tileSize * maxScreenCol;    //48*16 = 768px
+    public final int screenHeight = tileSize * maxScreenRow;  //48*12 = 576px
 
     // FPS, IPS
     int FPS = 60;
 
+    
     KeyHandler keyH = new KeyHandler();
-
     //Le Thread est ce qui va permettre le rafraichissement de l'écran ce qu'on appelle les FPS ou IPS en français
+    //Il permet l'instanciation de différent programme sur l'aspect graphique
+    //Par exemple le background et les mouvements des entité ne doivent pas s'actualiser de la même manière
+    //Cela permet une bonne optimisation 
     Thread gameThread;
+    //Ce qui il y'a juste en dessous sont justement ses instanciations
     Player player = new Player(this, keyH);
-
-    //Postition par défaut du joueur
-    int playerX = 100;
-    int playerY = 100;
-    int playerSpeed = 4;
+    TileManager tileM = new TileManager(this);
 
     //On dimensionne l'écran d'affichage avec les précedentes valeurs
     public GamePanel() {
@@ -136,6 +137,8 @@ public class GamePanel extends JPanel implements Runnable{
 
         //Permet un meilleur contrôle géographique/cartésien/couleurs/textes
         Graphics2D g2 = (Graphics2D)g;
+
+        tileM.draw(g2);
 
         player.draw(g2);
 
