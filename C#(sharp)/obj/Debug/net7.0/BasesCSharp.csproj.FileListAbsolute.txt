@@ -1,0 +1,14 @@
+/home/administrateur/Bureau/delivery/C#(sharp)/bin/Debug/net7.0/BasesCSharp
+/home/administrateur/Bureau/delivery/C#(sharp)/bin/Debug/net7.0/BasesCSharp.deps.json
+/home/administrateur/Bureau/delivery/C#(sharp)/bin/Debug/net7.0/BasesCSharp.runtimeconfig.json
+/home/administrateur/Bureau/delivery/C#(sharp)/bin/Debug/net7.0/BasesCSharp.dll
+/home/administrateur/Bureau/delivery/C#(sharp)/bin/Debug/net7.0/BasesCSharp.pdb
+/home/administrateur/Bureau/delivery/C#(sharp)/obj/Debug/net7.0/BasesCSharp.GeneratedMSBuildEditorConfig.editorconfig
+/home/administrateur/Bureau/delivery/C#(sharp)/obj/Debug/net7.0/BasesCSharp.AssemblyInfoInputs.cache
+/home/administrateur/Bureau/delivery/C#(sharp)/obj/Debug/net7.0/BasesCSharp.AssemblyInfo.cs
+/home/administrateur/Bureau/delivery/C#(sharp)/obj/Debug/net7.0/BasesCSharp.csproj.CoreCompileInputs.cache
+/home/administrateur/Bureau/delivery/C#(sharp)/obj/Debug/net7.0/BasesCSharp.dll
+/home/administrateur/Bureau/delivery/C#(sharp)/obj/Debug/net7.0/refint/BasesCSharp.dll
+/home/administrateur/Bureau/delivery/C#(sharp)/obj/Debug/net7.0/BasesCSharp.pdb
+/home/administrateur/Bureau/delivery/C#(sharp)/obj/Debug/net7.0/BasesCSharp.genruntimeconfig.cache
+/home/administrateur/Bureau/delivery/C#(sharp)/obj/Debug/net7.0/ref/BasesCSharp.dll
