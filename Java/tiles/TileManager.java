@@ -20,10 +20,10 @@ public class TileManager {
         this.gp =gp;
 
         tile = new Tile[10];    //Ici on définis une liste de 10 type de tiles ex(grass, water, tree, mountain,...)
-        mapTileNum = new int [gp.maxScreenCol][gp.maxScreenRow];
+        mapTileNum = new int [gp.maxWorldCol][gp.maxWorldRow];
 
         getTileImage();
-        loadMap("/Java/maps/map01.txt");
+        loadMap("/Java/maps/world01.txt");
     }
 
     public void getTileImage(){
@@ -38,6 +38,14 @@ public class TileManager {
             tile[2] = new Tile();
             tile[2].image = ImageIO.read(getClass().getResourceAsStream("/Java/res/tiles/water.png"));
 
+            tile[3] = new Tile();
+            tile[3].image = ImageIO.read(getClass().getResourceAsStream("/Java/res/tiles/earth.png"));
+
+            tile[4] = new Tile();
+            tile[4].image = ImageIO.read(getClass().getResourceAsStream("/Java/res/tiles/tree.png"));
+
+            tile[5] = new Tile();
+            tile[5].image = ImageIO.read(getClass().getResourceAsStream("/Java/res/tiles/sand.png"));
 
         }
         catch(IOException e) {
@@ -57,11 +65,11 @@ public class TileManager {
             //Ici on créer une boucle permettant de lire le background avec un fichier .txt comme modèle
             //Cela permet d'éviter d'écrire les cases et les maps une par une et d'avoir une gestion plus rapide et visible 
             //Dans le cas où il y a plusieurs maps
-            while (col < gp.maxScreenCol &&  row < gp.maxScreenRow){
+            while (col < gp.maxWorldCol &&  row < gp.maxWorldRow){
 
                 String line = br.readLine();
 
-                while(col < gp.maxScreenCol) {
+                while(col < gp.maxWorldCol) {
 
                     String numbers[] = line.split(" ");
 
@@ -70,7 +78,7 @@ public class TileManager {
                     mapTileNum[col][row] = num;
                     col++;
                 }
-                if(col == gp.maxScreenCol){
+                if(col == gp.maxWorldCol){
                     col = 0;
                     row++;
                 }  
@@ -87,30 +95,39 @@ public class TileManager {
     public void draw(Graphics2D g2){
         
 
-        int col = 0;
-        int row = 0;
-        int x = 0;
-        int y = 0;
+        int worldCol = 0;
+        int worldRow = 0;
 
         //Ici on dessine le .txt plus haut
-        while(col < gp.maxScreenCol && row < gp.maxScreenRow){
+        while(worldCol < gp.maxWorldCol && worldRow < gp.maxWorldRow){
 
-            int tileNum = mapTileNum[col][row];
+            int tileNum = mapTileNum[worldCol][worldRow];
 
-            //Le schéma est le suivant drawImage(image, CoordX, CoordY, SizeX, SizeY, ImageObserver = null[pas besoins d'actualiser les cases avant qu'elles soit totalement construite])
-            g2.drawImage(tile[tileNum].image, x, y, gp.tileSize, gp.tileSize, null);
-            col++;
-            x += gp.tileSize;
 
-            if (col == gp.maxScreenCol){
-                col = 0;
-                x = 0;
-                row++;
-                y += gp.tileSize;
+            // C'est ici qu'on va simuler une caméra avec le player au centre 
+            // ça va déplacer l'origine qui est en haut a gauche de l'écran
+            int worldX = worldCol * gp.tileSize;
+            int worldY = worldRow * gp.tileSize;
+            int screenX = worldX - gp.player.worldX + gp.player.screenX; // Ici on permet en plus de bloquer la limite dans le cas où le player arrive en bout de map
+            int screenY = worldY - gp.player.worldY + gp.player.screenY;
+
+            // cette boucle permet d'afficher que les cases dans le perimètre du player
+            if(worldX + gp.tileSize > gp.player.worldX - gp.player.screenX && 
+                worldX - gp.tileSize < gp.player.worldX + gp.player.screenX &&
+                worldY + gp.tileSize > gp.player.worldY - gp.player.screenY &&
+                worldY - gp.tileSize < gp.player.worldY + gp.player.screenY){
+
+                //Le schéma est le suivant drawImage(image, CoordX, CoordY, SizeX, SizeY, ImageObserver = null[pas besoins d'actualiser les cases avant qu'elles soit totalement construite])
+                g2.drawImage(tile[tileNum].image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+                }
+
+  
+            worldCol++;
+
+            if (worldCol == gp.maxWorldCol){
+                worldCol = 0;
+                worldRow++;
             }
-
         }
-
-    }
-    
+    }    
 }
