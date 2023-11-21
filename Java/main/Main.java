@@ -6,7 +6,7 @@ public class Main {
     public static void main(String[] args){
 
         //Création d'une fenêtre
-        JFrame window =new JFrame();
+        JFrame window = new JFrame();
         //Pour pouvoir fermer la fenêtre
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //Pour ne pas avoir a Resize la fenêtre

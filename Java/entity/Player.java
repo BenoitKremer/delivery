@@ -1,6 +1,7 @@
 package Java.entity;
 
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -28,6 +29,12 @@ public class Player extends Entity{
         screenX = gp.screenWidth/2 - (gp.tileSize/2); //position centré du joueur en largeur (caméra)
         screenY = gp.screenHeight/2 - (gp.tileSize/2); //position centré du joueur en hauteur (caméra)
 
+        solidArea = new Rectangle();
+        solidArea.x = 8;
+        solidArea.y = 16;
+        solidArea.height = 32;
+        solidArea.width = 32;
+
         setDefaultValues();
         getPlayerImage();
     }
@@ -35,8 +42,8 @@ public class Player extends Entity{
     //Données du Player (position et spawn par défaut)
     public void setDefaultValues() {
 
-        worldX = gp.tileSize * 23;
-        worldY = gp.tileSize * 21;
+        worldX = gp.tileSize * 24;
+        worldY = gp.tileSize * 22;
         speed = 4;
         direction = "down";
     }
@@ -52,7 +59,7 @@ public class Player extends Entity{
             left1 = ImageIO.read(getClass().getResourceAsStream("/Java/res/Player/KnightLeftAFK.png"));
             left2 = ImageIO.read(getClass().getResourceAsStream("/Java/res/Player/KnightLeftMove.png"));
             right1 = ImageIO.read(getClass().getResourceAsStream("/Java/res/Player/KnightRightAFK.png"));
-            right2 = ImageIO.read(getClass().getResourceAsStream("/Java/res/Player/KnightRightMove.png"));
+            right2 = ImageIO.read(getClass().getResourceAsStream("/Java/res/Player/KnightRightMove.png"));  
 
 
         }
@@ -70,9 +77,22 @@ public class Player extends Entity{
          || keyH.leftPressed == true 
          || keyH.rightPressed == true){
 
+            if(keyH.upPressed == true) {
+                direction = "up";
+            }
+            else if (keyH.downPressed == true){
+                direction = "down";
+            }
+            else if (keyH.leftPressed == true){
+                direction = "left";
+            }
+            else if (keyH.rightPressed == true){
+                direction = "right";
+            }
+
             /*Cette partie permet "d'animer" le sprite 
              * c'est ce qui va faire le changement entre
-            la frame(image) 1 et la frame 2 */
+               la frame(image) 1 et la frame 2 */ 
             spriteCounter++;
             if(spriteCounter > 10){ //Le 10 permet de changer toutes les 10frames DU JEU donc à 60 FPS 6 changements par secondes
                 if(spriteNum ==1){
@@ -83,27 +103,21 @@ public class Player extends Entity{
                 }
                 spriteCounter = 0;
             }
-            
-        }
-        
-        if(keyH.upPressed == true) {
-            direction = "up";
-            worldY -= speed;
-        }
-        else if (keyH.downPressed == true){
-            direction = "down";
-            worldY += speed;
-        }
-        else if (keyH.leftPressed == true){
-            direction = "left";
-            worldX -= speed;
-        }
-        else if (keyH.rightPressed == true){
-            direction = "right";
-            worldX += speed;
-        }
 
-        
+            // Appel de la fonction pour le contrôle de la hitbox
+            collisionOn = false;
+            gp.cCheker.checkTile(this);
+
+            // Si la collision est false le personnage peut bouger 
+            if(collisionOn == false){
+                switch(direction){
+                    case "up": worldY -= speed; break;
+                    case "down": worldY += speed; break;
+                    case "left": worldX -= speed; break;
+                    case "right": worldX += speed; break;
+                }
+            }        
+        }  
     }
 
     //Partie graphique (ou draw)

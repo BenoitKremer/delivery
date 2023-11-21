@@ -44,6 +44,7 @@ public class GamePanel extends JPanel implements Runnable{
     //Ce qui il y'a juste en dessous sont justement ses instanciations
     public Player player = new Player(this, keyH);
     TileManager tileM = new TileManager(this);
+    public CollisionCheker cCheker = new CollisionCheker(this);
 
     //On dimensionne l'écran d'affichage avec les précedentes valeurs
     public GamePanel() {
@@ -92,7 +93,7 @@ public class GamePanel extends JPanel implements Runnable{
                 update();
 
                 // Il s'agit de la class paintComponent()
-                // C'est ue appelation spécial
+                // C'est une appelation spécial
                 repaint();
 
                 delta--;
@@ -149,7 +150,8 @@ public class GamePanel extends JPanel implements Runnable{
 
         player.draw(g2);
 
-        // Pour garder les informations en mémoire
+        // Permet de libérer des ressources
+        // Ça évite les fuites de mémoire et de potentiel bug d'affichage
         g2.dispose();
     }
 }

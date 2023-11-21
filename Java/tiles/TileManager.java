@@ -13,8 +13,8 @@ public class TileManager {
 
     // On place les "tiles" (cases) dans une liste pour pouvoir les manipuler plus facilement
     GamePanel gp;
-    Tile[] tile;
-    int mapTileNum[][];
+    public Tile[] tile;
+    public int mapTileNum[][];
 
     public TileManager(GamePanel gp){
         this.gp =gp;
@@ -34,15 +34,18 @@ public class TileManager {
 
             tile[1] = new Tile();
             tile[1].image = ImageIO.read(getClass().getResourceAsStream("/Java/res/tiles/wall.png"));
+            tile[1].collision = true;
 
             tile[2] = new Tile();
             tile[2].image = ImageIO.read(getClass().getResourceAsStream("/Java/res/tiles/water.png"));
+            tile[2].collision = true;
 
             tile[3] = new Tile();
             tile[3].image = ImageIO.read(getClass().getResourceAsStream("/Java/res/tiles/earth.png"));
 
             tile[4] = new Tile();
             tile[4].image = ImageIO.read(getClass().getResourceAsStream("/Java/res/tiles/tree.png"));
+            tile[4].collision = true;
 
             tile[5] = new Tile();
             tile[5].image = ImageIO.read(getClass().getResourceAsStream("/Java/res/tiles/sand.png"));
@@ -108,10 +111,10 @@ public class TileManager {
             // ça va déplacer l'origine qui est en haut a gauche de l'écran
             int worldX = worldCol * gp.tileSize;
             int worldY = worldRow * gp.tileSize;
-            int screenX = worldX - gp.player.worldX + gp.player.screenX; // Ici on permet en plus de bloquer la limite dans le cas où le player arrive en bout de map
+            int screenX = worldX - gp.player.worldX + gp.player.screenX;
             int screenY = worldY - gp.player.worldY + gp.player.screenY;
 
-            // cette boucle permet d'afficher que les cases dans le perimètre du player
+            // cette boucle permet d'afficher que les cases dans le perimètre du player 
             if(worldX + gp.tileSize > gp.player.worldX - gp.player.screenX && 
                 worldX - gp.tileSize < gp.player.worldX + gp.player.screenX &&
                 worldY + gp.tileSize > gp.player.worldY - gp.player.screenY &&
